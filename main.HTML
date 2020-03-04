@@ -12,14 +12,14 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
+   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
  <script src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
   
 
    
 
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
     <script src="https://cdn.datatables.net/plug-ins/1.10.20/dataRender/percentageBars.js"></script>
 
 
@@ -43,7 +43,8 @@
                     targets: 6,
                     render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#ff8247', '#090808', 0, 'solid')
                 }],
-                responsive: true
+                responsive: true,
+                "order": [[ 0, "desc" ]]
             });
         });
     </script>
