@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>P1P6 Output</title>
@@ -19,9 +20,83 @@
     <script src="https://cdn.datatables.net/plug-ins/1.10.20/dataRender/percentageBars.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
-    <script>
+ 
+
+
+<style> 
+#banner1 {
+  font-size: 12px;
+  background-image: url(none.jpg), url(wood.jpg);
+  background-position: right bottom, left top;
+  background-repeat: no-repeat, repeat;
+  padding: 10px;
+}
+</style>
+
+<style>
+      button {
+      display: inline-block;
+      background-color: #7b38d8;
+      border-radius: 10px;
+      border: 4px double #cccccc;
+      color: #eeeeee;
+      text-align: center;
+      font-size: 12px;
+      padding: 5px;
+      width: 100px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px;
+      }
+      button span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+      }
+      button span:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+      }
+      button:hover {
+      background-color: #ffa500;
+      }
+      button:hover span {
+      padding-right: 25px;
+      }
+      button:hover span:after {
+      opacity: 1;
+      right: 0;
+      }
+    </style>
+
+
+   <script>
+
         $(document).ready(function() {
-            $.fn.dataTable.moment('DD-MMM-YY');
+
+
+$('#pastDue').on('click', function () {
+	
+    <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+
+	table.columns(15).search("%", true, false, true).draw();
+document.activeElement.blur()
+   });      
+
+$('#all').on('click', function () {
+	
+    <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+
+	table.columns(15).search("", true, false, true).draw();
+document.activeElement.blur()
+   });    
+       
+$.fn.dataTable.moment('DD-MMM-YY');
             var table = $('#example').DataTable({
                 "columnDefs": [{
                     targets: 2,
@@ -47,40 +122,31 @@
         });
 
 
+   
 
 
     </script>
-<script>
-	$('#all').on('click', function () {
-    $('#example').DataTable().columns(1).search("").draw();
-});
-
-$('#PastDue').keyup(function () {
-    $('#example').DataTable().columns(1).search("spare").draw();
-}) 
-</script>
-
-<style> 
-#banner1 {
-  background-image: url(img_flwr.gif), url(paper.gif);
-  background-position: right bottom, left top;
-  background-repeat: no-repeat, repeat;
-  padding: 15px;
-}
-</style>
 
 </head>
 
 
 <body>
-  
-<div id="banner1">
-  <h1>Past Due</h1>
 
-<div class="btn-group full-right">
-    <button id="PastDue" class="btn btn-default filter">Past Due</button>
-    <button id="all" class="btn btn-default filter">All</button>
+<div id="banner1">
+  <h1>P1P6 Loading Plan</h1>
+<p>As of 09-March 2020</p>
 </div>
+
+ <button id="all">
+    <span>All</span>
+    </button>
+
+ <button id="pastDue">
+    <span>Past Due</span>
+    </button>
+
+
+<p></p>
     <table id="example" class="display nowrap" style="width:100%">
         <thead>
             <tr>
@@ -10520,6 +10586,7 @@ $('#PastDue').keyup(function () {
             </tr>
         </tfoot>
     </table>
-</body>
 
+
+</body>
 </html>
