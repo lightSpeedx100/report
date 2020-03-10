@@ -83,7 +83,7 @@
 $('#pastDue').on('click', function () {
 	
     <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
-
+	$("#mytitle").html("P1P6 Loading Plan (Past Due)");
 	table.columns(15).search("%", true, false, true).draw();
 document.activeElement.blur()
    });      
@@ -91,7 +91,7 @@ document.activeElement.blur()
 $('#all').on('click', function () {
 	
     <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
-
+	$("#mytitle").html("P1P6 Loading Plan (ALL)");
 	table.columns(15).search("", true, false, true).draw();
 document.activeElement.blur()
    });    
@@ -133,7 +133,7 @@ $.fn.dataTable.moment('DD-MMM-YY');
 <body>
 
 <div id="banner1">
-  <h1>P1P6 Loading Plan</h1>
+  <h1 id="mytitle">P1P6 Loading Plan (ALL)</h1>
 <p>As of 09-Feb 2020</p>
 </div>
 
