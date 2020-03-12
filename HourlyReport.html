@@ -90,7 +90,7 @@
                 text: 'P1P6 OUTPUT SUMMARY'
             },
             subtitle: {
-                text: 'As of 12-Mar-20 07:48:37 AM'
+                text: 'As of 12-Mar-20 08:04:02 AM'
             },
             accessibility: {
                 announceNewData: {
@@ -117,13 +117,7 @@
                     }
                 }
             },
-exporting: {
-  buttons: {
-    contextButton: {
-      menuItems: Highcharts.getOptions().exporting.buttons.contextButton.menuItems.filter(item => item !== 'openInCloud')
-    }
-  }
-},
+
             series: [{name:'11-Mar',data:[
 {name: 'P1',y: 3.13,drilldown: 'P1_11-Mar'},
 {name: 'P2',y: 0.69,drilldown: 'P2_11-Mar'},
@@ -132,9 +126,9 @@ exporting: {
 {name: 'P6',y: 3,drilldown: 'P6_11-Mar'},
 ]},
 {name:'12-Mar',data:[
-{name: 'P1',y: 0,drilldown: 'P1_12-Mar'},
-{name: 'P2',y: 0,drilldown: 'P2_12-Mar'},
-{name: 'P3P4',y: 0.21,drilldown: 'P3P4_12-Mar'},
+{name: 'P1',y: 0.23,drilldown: 'P1_12-Mar'},
+{name: 'P2',y: 0.11,drilldown: 'P2_12-Mar'},
+{name: 'P3P4',y: 0.36,drilldown: 'P3P4_12-Mar'},
 {name: 'P5',y: 0.13,drilldown: 'P5_12-Mar'},
 {name: 'P6',y: 0,drilldown: 'P6_12-Mar'},
 ]},
@@ -280,7 +274,7 @@ exporting: {
  data: [
 ['7:00 AM',0],
 ['8:00 AM',0],
-['9:00 AM',0],
+['9:00 AM',0.23],
 ['10:00 AM',0],
 ['11:00 AM',0],
 ['12:00 PM',0],
@@ -306,7 +300,7 @@ exporting: {
 {id: 'P2_12-Mar',name: 'P2 12-Mar',
  data: [
 ['7:00 AM',0],
-['8:00 AM',0],
+['8:00 AM',0.11],
 ['9:00 AM',0],
 ['10:00 AM',0],
 ['11:00 AM',0],
@@ -333,8 +327,8 @@ exporting: {
 {id: 'P3P4_12-Mar',name: 'P3P4 12-Mar',
  data: [
 ['7:00 AM',0.1],
-['8:00 AM',0.11],
-['9:00 AM',0],
+['8:00 AM',0.21],
+['9:00 AM',0.05],
 ['10:00 AM',0],
 ['11:00 AM',0],
 ['12:00 PM',0],
