@@ -10,6 +10,29 @@
         <link href="layout_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script>
+         //function to fix height of iframe!
+         var calcHeight = function() {
+           //var headerDimensions = 0; //$('#header-bar').height();
+           $('#preview-frame').height($(window).height());
+         }
+         
+         $(document).ready(function() {
+           calcHeight();
+           /*$('#header-bar a.close').mouseover(function() {
+             $('#header-bar a.close').addClass('activated');
+           }).mouseout(function() {
+             $('#header-bar a.close').removeClass('activated');
+           });*/
+         }); 
+         
+         $(window).resize(function() {
+           calcHeight();
+         }).load(function() {
+           calcHeight();
+         });
+      </script>
 
 </head>
     <body>
@@ -97,16 +120,8 @@
             <div id="layoutSidenav_content">
                 <main>
 
-		<frameset rows="100%,*"> 
-    <frame src= 
-"main2.html"> 
-        <noframes> 
-  
-            <body> 
-  
-            </body> 
-        </noframes> 
-</frameset> 
+		 <iframe id="preview-frame" src="main2.html" name="preview-frame" frameborder="0" noresize="noresize" style="height: 902px;">
+      </iframe>
 
                 </main>
                 <footer class="py-4 bg-light mt-auto">
