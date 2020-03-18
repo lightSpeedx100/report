@@ -27,30 +27,6 @@
 
 </style>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <script>
-         //function to fix height of iframe!
-         var calcHeight = function() {
-           //var headerDimensions = 0; //$('#header-bar').height();
-           $('#preview-frame').height($(window).height());
-         }
-         
-         $(document).ready(function() {
-           calcHeight();
-           /*$('#header-bar a.close').mouseover(function() {
-             $('#header-bar a.close').addClass('activated');
-           }).mouseout(function() {
-             $('#header-bar a.close').removeClass('activated');
-           });*/
-         }); 
-         
-         $(window).resize(function() {
-           calcHeight();
-         }).load(function() {
-           calcHeight();
-         });
-      </script>
-
 </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -88,7 +64,7 @@
                             >
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Layouts
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
                             ></a>
@@ -119,7 +95,7 @@
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html"
+                            <a class="nav-link" href="HourlyReport.html" target="myiframe"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts</a
                             ><a class="nav-link" href="tables.html"
@@ -136,8 +112,9 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+		
 		<div class="iframe-container">
-  		<iframe width="1425" height="859" src="main.html"></iframe>
+  		<iframe name="myiframe" width="1425" height="859" src=""></iframe>
 		</div>
 		
 
