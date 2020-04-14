@@ -146,6 +146,10 @@ $.fn.dataTable.ext.search.push(
                 <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
                 $("#mytitle").html("P1P6 Loading Plan (Past Due)");
                 table.columns(15).search("%", true, false, true).draw();
+		
+$('#container').css( 'display', 'block' );
+table.columns.adjust().draw();
+
                 document.activeElement.blur()
             });
 
@@ -174,18 +178,23 @@ $.fn.dataTable.ext.search.push(
             var table = $('#example').DataTable({
                 "columnDefs": [{
                     targets: 2,
+		    width: '40%',	
                     render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#66CDAA', '#090808', 0, 'solid')
                 }, {
                     targets: 3,
+		    width: '40%',	
                     render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#cdaa7d', '#090808', 0, 'solid')
                 }, {
                     targets: 4,
+		    width: '30%',	
                     render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#0000ff', '#090808', 0, 'solid')
                 }, {
                     targets: 5,
+                    width: '80%',
                     render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#66cd00', '#090808', 0, 'solid')
                 }, {
                     targets: 6,
+		    width: '80%',	
                     render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#ff8247', '#090808', 0, 'solid')
                 }],
 
