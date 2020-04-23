@@ -259,9 +259,10 @@ $.fn.dataTable.ext.search.push(
 	    });	
 
 	$('#example tbody').on( 'click', 'td', function () {
-            alert('Data:'+$(this).html().trim());
+       <!--     alert('Data:'+$(this).html().trim());
             alert('Row:'+$(this).parent().find('td').html().trim());
             alert('Column:'+$('#example thead tr th').eq($(this).index()).html().trim());
+       -->	    
 	    var table = $('#details').DataTable()
 	    var mydata=	$(this).html().trim()
 	    table.columns(7).search(mydata, true, false, true).draw();
