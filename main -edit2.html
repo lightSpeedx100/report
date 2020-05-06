@@ -178,7 +178,7 @@ $.fn.dataTable.ext.search.push(
             });
 
 	
- $('#myFilter').on('click', function() {
+ 	    $('#myFilter').on('click', function() {
 		var table = $('#example').DataTable();
                 table.draw();
 		document.activeElement.blur()
@@ -222,14 +222,18 @@ $.fn.dataTable.ext.search.push(
                 ,
                 buttons: [
 		
-
 		{
-                text: 'All',
+                extend: 'collection',
+                text: 'Selection',
+                buttons: [
+		{
+                text: 'All/Past Due',
                 action: function ( e, dt, node, config ) {
                     var table = $('#example').DataTable();
                 <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
                 $("#mytitle").html("P1P6 Loading Plan (ALL)");
                 table.columns(15).search("", true, false, true).draw();
+		table.columns(6).search("", true, false, true).draw();
                 	}
             	  },
 		{
@@ -243,7 +247,24 @@ $.fn.dataTable.ext.search.push(
 		table.columns.adjust().draw();
 
                 	}
-            	  },		
+            	  },
+		{
+                text: 'Open P6',
+                action: function ( e, dt, node, config ) {
+		    alert(document.getElementById("mytitle").textContent);	
+                    var table = $('#example').DataTable();
+                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                $("#mytitle").html("P1P6 Loading Plan (Past Due-Open P6)");
+                table.columns(15).search("%", true, false, true).draw();
+		table.columns(6).search("^(0?[0-9][0-9]|[0])$", true, false, true).draw();	
+		$('#container').css( 'display', 'block' );
+		table.columns.adjust().draw();
+
+                	}
+            	  },
+		],
+                dropup: true
+		},		
 
 		{extend: 'excel',
 		    //className: 'mybutton',	
