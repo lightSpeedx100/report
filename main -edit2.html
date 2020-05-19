@@ -171,6 +171,7 @@ $.fn.dataTable.ext.search.push(
 
             $('#all').on('click', function() {
 		var table = $('#example').DataTable();
+		
                 <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
                 $("#mytitle").html("P1P6 Loading Plan (ALL)");
                 table.columns(15).search("", true, false, true).draw();
@@ -227,39 +228,76 @@ $.fn.dataTable.ext.search.push(
                 text: 'Selection',
                 buttons: [
 		{
-                text: 'All/Past Due',
+                text: 'All',
                 action: function ( e, dt, node, config ) {
-                    var table = $('#example').DataTable();
-                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                 //   var table = $('#example').DataTable();
+		//    table.columns(15).search("%|Complete", true, false, true).draw();
                 $("#mytitle").html("P1P6 Loading Plan (ALL)");
-                table.columns(15).search("", true, false, true).draw();
-		table.columns(6).search("", true, false, true).draw();
+                table.search('').columns().search('').draw();
                 	}
             	  },
 		{
                 text: 'Past Due',
                 action: function ( e, dt, node, config ) {
-                    var table = $('#example').DataTable();
+                 //   var table = $('#example').DataTable();
                 <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
                 $("#mytitle").html("P1P6 Loading Plan (Past Due)");
+		table.search('').columns().search('').draw();
                 table.columns(15).search("%", true, false, true).draw();
 		$('#container').css( 'display', 'block' );
+		//table.columns.adjust().draw();
+
+                	}
+            	  },
+		{
+                text: 'Open P5',
+                action: function ( e, dt, node, config ) {
+		    //alert(document.getElementById("mytitle").textContent);	
+                    var table = $('#example').DataTable();
+                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                $("#mytitle").html("P1P6 Loading Plan (Open P5)");
+		//CLEARING ALL FILTERS
+		table.search('').columns().search('').draw();
+		detailstable.search('').columns().search('').draw();
+
+                table.columns(15).search("%", true, false, true).draw();
+		//table.columns(5).search("", true, false, true).draw();
+                //table.columns(6).search("", true, false, true).draw(); 
+		
+		table.columns(5).search("^(0?[0-9][0-9]|[0])$", true, false, true).draw();	
+		$('#container').css( 'display', 'block' );
+		table.$('tr.selected').removeClass('selected');
 		table.columns.adjust().draw();
+
+		detailstable.columns(2).search("P5", true, false, true).draw();
+		$("#mydetail").html("All Open WO for P5");
+		
 
                 	}
             	  },
 		{
                 text: 'Open P6',
                 action: function ( e, dt, node, config ) {
-		    alert(document.getElementById("mytitle").textContent);	
-                    var table = $('#example').DataTable();
+		    //alert(document.getElementById("mytitle").textContent);	
+                 //   var table = $('#example').DataTable();
                 <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
-                $("#mytitle").html("P1P6 Loading Plan (Past Due-Open P6)");
-                table.columns(15).search("%", true, false, true).draw();
+                $("#mytitle").html("P1P6 Loading Plan (Open P6)");
+                
+		//CLEARING ALL FILTERS
+		table.search('').columns().search('').draw();
+		detailstable.search('').columns().search('').draw();
+		
+		table.columns(15).search("%", true, false, true).draw();
+		//table.columns(5).search("", true, false, true).draw();
+                //table.columns(6).search("", true, false, true).draw();
+
 		table.columns(6).search("^(0?[0-9][0-9]|[0])$", true, false, true).draw();	
 		$('#container').css( 'display', 'block' );
+		table.$('tr.selected').removeClass('selected');
 		table.columns.adjust().draw();
 
+		detailstable.columns(2).search("P6", true, false, true).draw();
+		$("#mydetail").html("All Open WO for P6");
                 	}
             	  },
 		],
@@ -369,6 +407,7 @@ else if (process == "_P5_") { sprocess="P5";}
 else if (process == "_P6_") { sprocess="P6";}
 else {sprocess="";  };
 //alert(sprocess);
+detailstable.search('').columns().search('').draw();
 detailstable.columns(7).search(jcn, true, false, true).draw();	
 detailstable.columns(2).search(sprocess, true, false, true).draw();	   
 $("#mydetail").html(sprocess + " Open WO For " + jcn);
