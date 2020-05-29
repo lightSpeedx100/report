@@ -19,22 +19,13 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
 
-    <figure class="highcharts-figure">
+    
         <div id="container"></div>
-        <p class="highcharts-description">
-            
-        </p>
-    </figure>
-
+        
+   
     <script type="text/javascript">
         // Create the chart
-        Highcharts.setOptions({
-            chart: {
-                style: {
-                    fontFamily: 'serif'
-                }
-            }
-        });
+        
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
@@ -361,37 +352,7 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-],
-responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    align: 'center',
-                    verticalAlign: 'bottom',
-                    layout: 'horizontal'
-                },
-                yAxis: {
-                    labels: {
-                        align: 'left',
-                        x: 0,
-                        y: -5
-                    },
-                    title: {
-                        text: null
-                    }
-                },
-                subtitle: {
-                    text: null
-                },
-                credits: {
-                    enabled: false
-                }
-            }
-        }]
-    }
+]
             }
         });
     </script>
