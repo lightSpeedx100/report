@@ -9,7 +9,7 @@
    </head>
    
    <body>
-      <div id = "container" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+      <div id = "container"></div>
       <script language = "JavaScript">
          $(document).ready(function() { 
             Highcharts.data({
@@ -30,15 +30,17 @@
 
                      if (i > 0) {
                         // Remove special edition notes
-                        name = name.split(' -')[0];
+                        //name = name.split(' -')[0];
 
                         // Split into brand and version
-                        version = name.match(/([0-9]+[\.0-9x]*)/);
-                        
-                        if (version) {
-                           version = version[0];
-                        }
-                        brand = name.replace(version, '');
+                        //version = name.match(/([0-9]+[\.0-9x]*)/);
+			//alert(name);
+			version = name.split("-")[1];
+                        brand= name.split("-")[0];
+                 //       if (version) {
+                  //         version = version[0];
+                   //    }
+                  //      brand = name.replace(version, '');
 
                         // Create the main data
                         if (!brands[brand]) {
@@ -52,7 +54,7 @@
                            if (!versions[brand]) {
                               versions[brand] = [];
                            }
-                           versions[brand].push(['v' + version, columns[1][i]]);
+                           versions[brand].push([version, columns[1][i]]);
                         }
                      }
                   });
@@ -89,7 +91,7 @@
                   };  
                   var tooltip = {
                      headerFormat: '<span style = "font-size:11px">{series.name}</span><br>',
-                     pointFormat: '<span style = "color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total'
+                     pointFormat: '<span style = "color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b>'
                   };   
                   var credits = {
                      enabled: false
@@ -100,8 +102,10 @@
                      data: brandsData
                   }];
                   var drilldown = {
-                     series: drilldownSeries
-                  }   
+                     series: drilldownSeries,
+
+				}
+   
                   var json = {};   
                   json.chart = chart; 
                   json.title = title;   
@@ -120,18 +124,15 @@
       <!-- Data from www.netmarketshare.com. Select Browsers =>
          Desktop share by version. Download as tsv. -->
          
+
       <pre id = "tsv" style = "display:none">
-         Browser Version	Total Market Share
-         Microsoft Internet Explorer 8.0	26.61%
-Nav 3	10%         
-Chrome 18.0	4.01%
-         Chrome 19.0	7.11%
-         Nav 2	11%
-         Nav 4	10%
-         Nav 5	10%
-Nav 1	10%
-Microsoft Internet Explorer 4.0	26.61%	 
-Nav 11	10%
+testing only
+Chrome-B	4.01%
+Chrome-A	4.01%
+Nav-B	10%
+Nav-BAAaa	10%
+Chrome-A	10%       
+
 
                </pre>
    </body>
