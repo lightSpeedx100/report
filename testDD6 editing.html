@@ -1,0 +1,247 @@
+<html>
+   <head>
+      <title>Highcharts Tutorial</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+      </script>
+      <script src = "https://code.highcharts.com/highcharts.js"></script>  
+      <script src = "https://code.highcharts.com/modules/drilldown.js"></script>  
+      <script src = "https://code.highcharts.com/modules/data.js"></script> 
+      <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
+
+<style type="text/css">
+        .highcharts-figure,
+        .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+        
+        
+        
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #EBEBEB;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+        
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+        
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+        
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+        
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+	.highcharts-drilldown-data-label text{
+  text-decoration:none !important;
+	}
+	.highcharts-xaxis-labels text {
+  text-decoration: none !important;
+	}
+
+    </style>
+
+
+<script language = "JavaScript">
+         $(document).ready(function() { 
+            Highcharts.data({
+               csv: document.getElementById('tsv').innerHTML,
+               itemDelimiter: '\t',
+               parsed: function (columns) {
+                  var brands = {}, brandsData = [], versions = {}, drilldownSeries = [];
+                  
+                  // Parse percentage strings
+                  columns[1] = $.map(columns[1], function (value) {
+                     if (value.indexOf('%') === value.length - 1) {
+                        value = parseFloat(value);
+                     }
+                     return value;
+                  });
+                  $.each(columns[0], function (i, name) {
+                     var brand, version;
+
+                     if (i > 0) {
+                        // Remove special edition notes
+                        //name = name.split(' -')[0];
+
+                        // Split into brand and version
+                        //version = name.match(/([0-9]+[\.0-9x]*)/);
+			//alert(name);
+			version = name.split("-")[1];
+                        brand= name.split("-")[0];
+                 //       if (version) {
+                  //         version = version[0];
+                   //    }
+                  //      brand = name.replace(version, '');
+
+                        // Create the main data
+                        if (!brands[brand]) {
+                           brands[brand] = columns[1][i];
+                        } else {
+                           brands[brand] += columns[1][i];
+                        }
+
+                        // Create the version data
+                        if (version !== null) {
+                           if (!versions[brand]) {
+                              versions[brand] = [];
+                           }
+                           versions[brand].push([version, columns[1][i]]);
+                        }
+                     }
+                  });
+                  $.each(brands, function (name, y) {
+                     brandsData.push({
+                        name: name,
+                        y: y,
+                        drilldown: versions[name] ? name : null
+                     });
+                  });
+                  $.each(versions, function (key, value) {
+                     drilldownSeries.push({
+                        name: key,
+                        id: key,
+                        data: value
+
+
+
+        	,states: {
+            select: {
+                color: 'blue'
+            }
+        },
+        allowPointSelect: true
+
+
+                     });
+                  }); 
+                  
+document.getElementById("demo").innerHTML = brands.Chrome;
+// Create the chart
+            $('#container').highcharts({
+                chart: {
+                    type: 'column' ,
+
+		    events: {
+                        drilldown: function (e) { 
+                            document.getElementById("clicky").innerHTML =e.point.name;
+                        },
+			drillup: function (e) {
+                    	   alert('drill Up' + this.options.series[0].data[0].name);
+                    
+                	}
+                    }	
+
+
+                },
+                title: {
+                    text: 'Browser market shares. November, 2013'
+                },
+                subtitle: {
+                    text: 'Click the columns to view versions. Source: netmarketshare.com.'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total percent market share'
+                    }
+                },
+		credits: {
+        		enabled: false
+    		},
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}%'
+                        },
+                        point: {
+                            events: {
+                                click: function () {
+                                    document.getElementById("clicky").innerHTML = "point this.name = [" + this.name + "], this.category = [" + this.category + "]" + this.series.name;
+                                }
+                            }
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                },
+
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: brandsData,
+
+
+		
+	
+                }],
+                drilldown: {
+		    series: drilldownSeries,
+		    	
+                    
+                 },
+
+            });
+        }
+    });
+});
+
+      </script>
+
+	
+   </head>
+   
+   <body>
+      <div id="container"></div>
+        <p class="highcharts-description">
+            
+        </p>
+      
+      <!-- Data from www.netmarketshare.com. Select Browsers =>
+         Desktop share by version. Download as tsv. -->
+         
+<h1 id="clicky">Will display point click members here..</h1>
+      <pre id = "tsv" style = "display:none">
+Operation	Test
+OP 30-Not Started	14%
+OP 80-Not Started	1%
+OP 90-Not Started	2%
+OP 40-Not Started	1%
+OP 35-Not Started	1%
+               </pre>
+   
+<p id="demo"></p>
+</body>
+   
+</html>

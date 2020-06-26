@@ -1,0 +1,644 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>P1P6 Loading Plan</title>
+  <LINK href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"> 
+
+   <LINK href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <LINK href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css" rel="stylesheet" type="text/css">
+    <LINK href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+   <LINK href="buttons.dataTables.min.css" rel="stylesheet" type="text/css">
+    
+ <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+       <script src="https://cdn.datatables.net/plug-ins/1.10.20/dataRender/percentageBars.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+   
+      <script src = "https://code.highcharts.com/highcharts.js"></script>  
+      <script src = "https://code.highcharts.com/modules/drilldown.js"></script>  
+      <script src = "https://code.highcharts.com/modules/data.js"></script> 
+      <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
+      
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+      <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    
+      <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+    
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/themes/dark-unica.js"></script>
+      
+      <style>
+  .br { 
+            display: block; 
+            margin-bottom: 0em; 
+        }
+   </style>
+  
+   <style>
+        #banner1 {
+            font-size: 12px;
+            background-image: url(none.jpg), url(wood.jpg);
+            background-position: right bottom, left top;
+            background-repeat: no-repeat, repeat;
+            padding: 2px;
+     
+        }
+ #banner2 {
+            font-size: 12px;
+            background-image: url(none.jpg), url(wood.jpg);
+            background-position: right bottom, left top;
+            background-repeat: no-repeat, repeat;
+            padding: 2px;
+     
+        }
+
+
+
+    </style>
+
+    <style>
+        #loader {
+            border: 12px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 12px solid #444444;
+            width: 70px;
+            height: 70px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .center {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            margin: auto;
+        }
+
+
+
+    </style>
+
+    <script>
+
+
+function hideDetails() {
+$("#banner2").hide();
+$('#details').parents('div.dataTables_wrapper').first().hide();
+   }
+
+function showDetails() {
+$("#banner2").show();
+$('#details').parents('div.dataTables_wrapper').first().show();
+   }
+       
+
+function myFunction() {
+
+ Highcharts.data({
+               csv: document.getElementById('tsv').innerHTML,
+               itemDelimiter: '\t',
+               parsed: function (columns) {
+                  var brands = {}, brandsData = [], versions = {}, drilldownSeries = [];
+                  
+                  // Parse percentage strings
+                  columns[1] = $.map(columns[1], function (value) {
+                     if (value.indexOf('%') === value.length - 1) {
+                        value = parseFloat(value);
+                     }
+                     return value;
+                  });
+                  $.each(columns[0], function (i, name) {
+                     var brand, version;
+
+                     if (i > 0) {
+                        // Remove special edition notes
+                        //name = name.split(' -')[0];
+
+                        // Split into brand and version
+                        //version = name.match(/([0-9]+[\.0-9x]*)/);
+			//alert(name);
+			version = name.split("-")[1];
+                        brand= name.split("-")[0];
+                 //       if (version) {
+                  //         version = version[0];
+                   //    }
+                  //      brand = name.replace(version, '');
+
+                        // Create the main data
+                        if (!brands[brand]) {
+                           brands[brand] = columns[1][i];
+                        } else {
+                           brands[brand] += columns[1][i];
+                        }
+
+                        // Create the version data
+                        if (version !== null) {
+                           if (!versions[brand]) {
+                              versions[brand] = [];
+                           }
+                           versions[brand].push([version, columns[1][i]]);
+                        }
+                     }
+                  });
+                  $.each(brands, function (name, y) {
+                     brandsData.push({
+                        name: name,
+                        y: y,
+                        drilldown: versions[name] ? name : null
+                     });
+                  });
+                  $.each(versions, function (key, value) {
+                     drilldownSeries.push({
+                        name: key,
+                        id: key,
+                        data: value
+
+
+
+        	,states: {
+            select: {
+                color: 'blue'
+            }
+        },
+        allowPointSelect: true
+
+
+                     });
+                  }); 
+                  
+//document.getElementById("demo").innerHTML = brands.Chrome;
+// Create the chart
+            $('#container').highcharts({
+                chart: {
+                    type: 'column' ,
+
+		    events: {
+                        drilldown: function (e) { 
+                            document.getElementById("clicky").innerHTML =e.point.name;
+                        },
+			drillup: function (e) {
+                    	   alert('drill Up' + this.options.series[0].data[0].name);
+                    
+                	}
+                    }	
+
+
+                },
+                title: {
+                    text: 'Browser market shares. November, 2013'
+                },
+                subtitle: {
+                    text: 'Click the columns to view versions. Source: netmarketshare.com.'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total percent market share'
+                    }
+                },
+		credits: {
+        		enabled: false
+    		},
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}%'
+                        },
+                        point: {
+                            events: {
+                                click: function () {
+                                    document.getElementById("clicky").innerHTML = "point this.name = [" + this.name + "], this.category = [" + this.category + "]" + this.series.name;
+                                }
+                            }
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                },
+
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: brandsData,
+
+
+		
+	
+                }],
+                drilldown: {
+		    series: drilldownSeries,
+		    	
+                    
+                 },
+
+            });
+        }
+    });
+
+
+};
+
+
+
+
+
+
+        $(document).ready(function() {
+ 
+     document.querySelector("#loader").style.display = "none";
+
+
+ 
+            $.fn.dataTable.moment('DD-MMM-YY');
+            var table = $('#example').DataTable({
+                "columnDefs": [{
+                    targets: 2,
+       
+                    render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#66CDAA', '#090808', 0, 'solid')
+                }, {
+                    targets: 3,
+       
+                    render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#cdaa7d', '#090808', 0, 'solid')
+                }, {
+                    targets: 4,
+       
+                    render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#0000ff', '#090808', 0, 'solid')
+                }, {
+                    targets: 5,
+                    
+                    render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#66cd00', '#090808', 0, 'solid')
+                }, {
+                    targets: 6,
+       
+                    render: $.fn.dataTable.render.percentBar('round', '#fff', '#000000', '#ff8247', '#090808', 0, 'solid')
+                }],
+
+  
+         dom: 'Bfrtip',
+                responsive: true,
+                "order": [
+                    [0, "asc"]
+                ]
+
+                ,
+                buttons: [
+  
+  {
+                extend: 'collection',
+                text: 'Selection',
+		autoClose: true,
+                buttons: [
+  {
+                text: 'All',
+                action: function ( e, dt, node, config ) {
+                
+  $("#mytitle").html("P1P6 Loading Plan (ALL)");
+                table.search('').columns().search('').draw();
+  hideDetails();
+                 }
+               },
+  {
+                text: 'Past Due',
+                action: function ( e, dt, node, config ) {
+                $("#mytitle").html("P1P6 Loading Plan (Past Due)");
+  table.search('').columns().search('').draw();
+                table.columns(15).search("%", true, false, true).draw();
+  $('#container').css( 'display', 'block' );
+  hideDetails();
+                 }
+               },
+  {
+                text: 'Open P1',
+                action: function ( e, dt, node, config ) {
+  $("#mytitle").html("P1P6 Loading Plan (Open P1)");
+  table.search('').columns().search('').draw();
+  detailstable.search('').columns().search('').draw();
+
+                table.columns(15).search("%", true, false, true).draw();
+  table.columns(17).search("^(0?[1-9]|[1-9][0-9]|[1-9][0-9][0-9])$", true, false, true).draw(); 
+  $('#container').css( 'display', 'block' );
+  table.$('tr.selected').removeClass('selected');
+  //table.columns.adjust().draw();
+
+  detailstable.columns(2).search("P1", true, false, true).draw();
+  $("#mydetail").html("All Open WO for P1");
+  showDetails();
+  //getData();
+  updateChart2();
+ // chart.setTitle({ text: 'All Open WO for P1'});
+  //$("#banner2").hide();
+                 }
+               },
+  {
+                text: 'Open P2',
+                action: function ( e, dt, node, config ) {
+      //alert(document.getElementById("mytitle").textContent); 
+                    var table = $('#example').DataTable();
+                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                $("#mytitle").html("P1P6 Loading Plan (Open P2)");
+  //CLEARING ALL FILTERS
+  table.search('').columns().search('').draw();
+  detailstable.search('').columns().search('').draw();
+
+                table.columns(15).search("%", true, false, true).draw();
+  
+  table.columns(18).search("^(0?[1-9]|[1-9][0-9]|[1-9][0-9][0-9])$", true, false, true).draw(); 
+  $('#container').css( 'display', 'block' );
+  table.$('tr.selected').removeClass('selected');
+  //table.columns.adjust().draw();
+  
+  detailstable.columns(2).search("P2", true, false, true).draw();
+  $("#mydetail").html("All Open WO for P2");
+  showDetails();
+  updateChart();
+  $("#banner2").hide();
+
+                 }
+               },
+  {
+                text: 'Open P1P4',
+                action: function ( e, dt, node, config ) {
+      //alert(document.getElementById("mytitle").textContent); 
+                    var table = $('#example').DataTable();
+                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                $("#mytitle").html("P1P6 Loading Plan (Open P1P4)");
+  //CLEARING ALL FILTERS
+  table.search('').columns().search('').draw();
+  detailstable.search('').columns().search('').draw();
+
+                table.columns(15).search("%", true, false, true).draw();
+  
+  table.columns(19).search("^(0?[1-9]|[1-9][0-9]|[1-9][0-9][0-9])$", true, false, true).draw(); 
+  $('#container').css( 'display', 'block' );
+  table.$('tr.selected').removeClass('selected');
+  //table.columns.adjust().draw();
+
+  detailstable.columns(2).search("P1|P2|P3|P4", true, false, true).draw();
+  $("#mydetail").html("All Open WO for P1P4");
+  showDetails();
+  detailstable.order( [ 8, 'asc' ] ).draw();  
+  updateChart();
+  detailstable.order([ 0, 'asc' ],[ 8, 'asc' ] ).draw();  
+  $("#banner2").hide();
+ 
+
+                 }
+               },
+  {
+                text: 'Open P5',
+                action: function ( e, dt, node, config ) {
+      //alert(document.getElementById("mytitle").textContent); 
+                    var table = $('#example').DataTable();
+                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                $("#mytitle").html("P1P6 Loading Plan (Open P5)");
+  //CLEARING ALL FILTERS
+  table.search('').columns().search('').draw();
+  detailstable.search('').columns().search('').draw();
+
+                table.columns(15).search("%", true, false, true).draw();
+  //table.columns(5).search("", true, false, true).draw();
+                //table.columns(6).search("", true, false, true).draw(); 
+  
+  table.columns(20).search("^(0?[1-9]|[1-9][0-9]|[1-9][0-9][0-9])$", true, false, true).draw(); 
+  $('#container').css( 'display', 'block' );
+  table.$('tr.selected').removeClass('selected');
+  //table.columns.adjust().draw();
+
+  detailstable.columns(2).search("P5", true, false, true).draw();
+  $("#mydetail").html("All Open WO for P5");
+  showDetails();
+  updateChart();
+  $("#banner2").hide();
+
+                 }
+               },
+  {
+                text: 'Open P6',
+                action: function ( e, dt, node, config ) {
+      //alert(document.getElementById("mytitle").textContent); 
+                 //   var table = $('#example').DataTable();
+                <!--    table.columns(15).search("%|Complete", true, false, true).draw(); -->
+                $("#mytitle").html("P1P6 Loading Plan (Open P6)");
+                
+  //CLEARING ALL FILTERS
+  table.search('').columns().search('').draw();
+  $.fn.dataTable.moment('DD-MMM-YY');
+  detailstable.search('').columns().search('').draw();
+  
+  table.columns(15).search("%", true, false, true).draw();
+  table.columns(21).search("^(0?[1-9]|[1-9][0-9]|[1-9][0-9][0-9])$", true, false, true).draw();
+  
+  $('#container').css( 'display', 'block' );
+  table.$('tr.selected').removeClass('selected');
+  //table.columns.adjust().draw();
+
+  detailstable.columns(2).search("P6", true, false, true).draw();
+  $("#mydetail").html("All Open WO for P6");
+  showDetails();
+  updateChart();
+  $("#banner2").hide();
+                 }
+               },
+  ],
+                dropup: true
+  },  
+
+  {extend: 'excel',
+      //className: 'mybutton', 
+                    text: 'Excel',
+                    exportOptions: {
+                        columns: function(idx, data, node) {
+                            if ($(node).hasClass('noVis')) {
+                                return false;
+                            }
+
+                            return $('#example').DataTable().column(idx).visible();
+                        }
+                    }
+                }, {
+                    extend: 'colvis',
+      //className: 'mybutton', 
+                    text: 'Toggle',
+                    titleAttr: 'show hide columns',
+                    title: 'show hide columns',
+                    collectionLayout: 'two-column',
+                    columns: [':not(.noVis)'],
+                },
+  
+  
+            ]
+
+            });
+ 
+ $.fn.dataTable.moment('DD-MMM-YY');
+ var detailstable = $('#details').DataTable({
+   "language": {
+        "infoFiltered": ""
+          }, 
+  //columnDefs: [ {
+        // targets: 1,
+        // render: $.fn.dataTable.moment('DD-MMM-YY');
+     //   } ],
+  dom: 'RBrtip',
+  colReorder: true,
+  responsive: true,
+ //"order": [ [0, "asc"],[8, "asc"]
+ //               ],
+"aaSorting": [],  
+buttons: [{
+                    extend: 'excel',
+                    text: 'Excel',
+                    exportOptions: {
+                        columns: function(idx, data, node) {
+                            if ($(node).hasClass('noVis')) {
+                                return false;
+                            }
+
+                            return $('#details').DataTable().column(idx).visible();
+                        }
+                    }
+                }, {
+                    extend: 'colvis',
+                    text: 'Toggle',
+                    titleAttr: 'show hide columns',
+                    title: 'show hide columns',
+                    collectionLayout: 'two-column',
+                    columns: [':not(.noVis)'],
+                }]
+ 
+  
+     }); 
+ // table.columns(7).search("zzzzzz", true, false, true).draw();
+           detailstable.columns(7).search("zzzzzz", true, false, true).draw();
+ // var table = $('#example').DataTable();
+ // var detailstable = $('#details').DataTable() ;  
+ //$("#banner2").hide();
+ 
+ hideDetails();
+
+ var process="";
+ var jcn="";
+    
+$('#example tbody').on( 'click', 'td', function () {
+        
+    process=$('#example thead tr th').eq($(this).index()).html().trim();  
+ 
+    
+         
+        }); 
+
+
+
+    $('#example tbody').on( 'click', 'tr', function () {
+       if ( $(this).hasClass('selected') ) {
+           
+       } else {
+    
+           table.$('tr.selected').removeClass('selected');
+           $(this).addClass('selected');
+       };    
+           var data = table.row('.selected').data();
+    jcn=data[1] ;
+    //alert(jcn);
+    //alert(process); 
+       
+    //detailstable.columns(2).search(process, true, false, true).draw(); 
+           //detailstable.columns(7).search(jcn, true, false, true).draw();
+    //$('#details').DataTable({"iDisplayLength": 100, "search": {regex: true}}).column(2).search("P3|P4", true, false ).draw();
+    //detailstable.columns(2).search("P3|P4", true, false, true).draw(); 
+    
+
+ var sprocess=""
+if (process == "_P1_") { sprocess="P1";}
+else if (process == "_P2_") { sprocess="P2";}
+else if (process == "P3P4") { sprocess="P1|P2|P3|P4";}
+else if (process == "_P5_") { sprocess="P5";}
+else if (process == "_P6_") { sprocess="P6";}
+else {sprocess="";  };
+//alert(sprocess);
+detailstable.search('').columns().search('').draw();
+detailstable.columns(16).search(jcn, true, false, true).draw(); 
+detailstable.columns(2).search(sprocess, true, false, true).draw();    
+$("#mydetail").html(sprocess + " Open WO For " + jcn);
+showDetails();
+$('#mychart').find('.highcharts-container').hide();
+ }); 
+
+
+        });
+
+    </script>
+
+</head>
+
+
+
+
+  <body>
+    <button onclick="myFunction()">Click me</button>
+      <div id="loader" class="center"></div>
+     <pre id = "tsv" style = "display:none">
+Operation	Test
+OP 30-Not Started	14%
+OP 80-Not Started	1%
+OP 90-Not Started	2%
+OP 40-Not Started	1%
+OP 35-Not Started	1%
+               </pre>
+      <div id="banner1">
+         <h2 id="mytitle">P1P6 Loading Plan (ALL)</h2>
+         <h3>As of 22-May-20 04:24:39 PM</h3>
+      </div>
+      <p></p>
+      <table id="example" class="display nowrap" style="width:100%">
+      <thead><tr><th>Plan Start</th><th>P1P2  JCN</th><th>_P1_</th><th>_P2_</th><th>P3P4</th><th>_P5_</th><th>_P6_</th><th>P6 Farthest OP</th><th>SOW</th><th>#ECN Affected</th><th>MES ACT Start</th><th>P1P4MES Completed</th><th>P1P4 Cycle Time</th><th>P6.3 END</th><th>Ex-fact Date</th><th>Actual Ship Date</th><th>LavQty</th><th>OpenP1</th><th>OpenP2</th><th>OpenP3P4</th><th>OpenP5</th><th>OpenP6</th></tr></thead><tbody>
+<tr><td>12-Dec-18</td><td>2018.004_SPARES_PRIO1</td><td>100</td><td>0</td><td>100</td><td>0</td><td>0</td><td></td><td></td><td></td><td>12/13/2018</td><td>1/7/2019 8:39:00 PM</td><td>25</td><td></td><td></td><td>Completed</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+
+<tr><td>03-Feb-20</td><td>8053-1M681-ACN</td><td>100</td><td>100</td><td>100</td><td>98</td><td>92</td><td>0</td><td>411</td><td></td><td>11/29/2019</td><td>3/13/2020 11:34:00 AM</td><td>105</td><td>4/1/2020</td><td>4/23/2021</td><td>0%</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td></tr><tr><td>03-Feb-20</td><td>8054-1F040-XLR/RYR</td><td>100</td><td>100</td><td>100</td><td>100</td><td>91</td><td>0</td><td>414</td><td>4</td><td>11/12/2019</td><td>3/13/2020 1:09:00 PM</td><td>122</td><td>4/1/2020</td><td>4/30/2021</td><td>0%</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>6</td></tr><tr><td>03-Feb-20</td><td>8058-1M682-ACN</td><td>100</td><td>100</td><td>100</td><td>42</td><td>40</td><td>0</td><td>416</td><td></td><td>12/11/2019</td><td>5/19/2020 9:58:00 AM</td><td>160</td><td>4/1/2020</td><td>4/30/2021</td><td>0%</td><td>4</td><td>0</td><td>0</td><td>0</td><td>31</td><td>10</td></tr><tr><td>09-Dec-19</td><td>8030-1F206-VJA</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>220</td><td>444</td><td>1</td><td>10/31/2019</td><td>12/12/2019 3:07:00 PM</td><td>42</td><td>1/27/2020</td><td>3/26/2021</td><td>75%</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>03-Feb-20</td><td>C-7644-1G001-UAL</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>220</td><td>587</td><td></td><td>10/12/2019</td><td>10/28/2019 10:31:00 PM</td><td>16</td><td>4/1/2020</td><td>10/15/2021</td><td>0%</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody><tfoot><tr><th>Plan Start</th><th>P1P2  JCN</th><th>_P1_</th><th>_P2_</th><th>P3P4</th><th>_P5_</th><th>_P6_</th><th>P6 Farthest OP</th><th>SOW</th><th>#ECN Affected</th><th>MES ACT Start</th><th>P1P4MES Completed</th><th>P1P4 Cycle Time</th><th>P6.3 END</th><th>Ex-fact Date</th><th>Actual Ship Date</th><th>LavQty</th><th>OpenP1</th><th>OpenP2</th><th>OpenP3P4</th><th>OpenP5</th><th>OpenP6</th></tr></tfoot>
+      </table>
+
+
+<div id="container"></div>
+        <div id="mychart"></div>
+       <h1 id="clicky">Will display point click members here..</h1>
+
+      <div id="banner2">
+         <h2 id="mydetail"></h2>
+      </div>
+
+
+
+      <span class="br"></span>
+      <table id="details" class="display nowrap" style="width:100%">
+ <thead><tr><th>Plan Start</th><th>Work Number</th><th>Process</th><th>JCN</th><th>Kitting</th><th>Avail Matl</th><th>PN</th><th>Description</th><th>Current OP</th><th>JDE_Status</th><th>CNC_Status</th><th>MES_Start</th><th>MES_Last_Transaction</th><th>Idle Time(Hours)</th><th>Aging(days)</th><th>Remaining Days</th><th>P1P2  JCN</th></tr></thead><tbody>
+<tr><td>14-Sep-20</td><td>10871780</td><td>P4</td><td>2020.007_SPARES_DALRWK8  </td><td>0</td><td></td><td>1L460038-122X            </td><td>ASSY - PANEL, LEAD            </td><td>OP 212-Ongoing</td><td>45</td><td>OK</td><td>3/16/2020</td><td>5/21/2020 2:23:00 PM</td><td>25</td><td>67</td><td></td><td>2020.007_SPARES_DALRWK8</td></tr>
+<tr><td>04-May-20</td><td>10897771</td><td>P6</td><td>AAL SS229 RETROFIT-E     </td><td>3</td><td>118</td><td>LC128513                 </td><td>ASSY LAVATORY E SW P6.2       </td><td>OP 130-Not Started</td><td>45</td><td></td><td></td><td>5/6/2020 1:47:00 PM</td><td>386</td><td></td><td>7</td><td>AAL SS229 RETROFIT</td></tr><tr><td>04-May-20</td><td>10897773</td><td>P6</td><td>AAL SS229 RETROFIT-E     </td><td>7</td><td>0</td><td>LC128515                 </td><td>ASSY LAVATORY E SW P6.1 A     </td><td>OP 5-Not Started</td><td>45</td><td></td><td></td><td>5/6/2020 1:45:00 PM</td><td>386</td><td></td><td>7</td><td>AAL SS229 RETROFIT</td></tr></tbody><tfoot><tr><th>Plan Start</th><th>Work Number</th><th>Process</th><th>JCN</th><th>Kitting</th><th>Avail Matl</th><th>PN</th><th>Description</th><th>Current OP</th><th>JDE_Status</th><th>CNC_Status</th><th>MES_Start</th><th>MES_Last_Transaction</th><th>Idle Time(Hours)</th><th>Aging(days)</th><th>Remaining Days</th><th>P1P2  JCN</th></tr></tfoot>
+      </table>
+   </body>
+</html>

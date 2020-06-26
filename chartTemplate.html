@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chart</title>
+
+  <LINK href="jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <LINK href="jquery-ui.css" rel="stylesheet" type="text/css"> 
+    <script src = "jquery.min.js"></script>
+    <script src="jquery-3.3.1.js"></script>
+<script src="highcharts.js"></script>
+<script src = "drilldown.js"></script>
+  <script src = "data.js"></script> 
+
+
+
+<script src="jquery-ui.js"></script>
+<script src="dark-unica.js"></script>
+ <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script>
+  
+<style type="text/css">  
+        .tooltip  
+        {  
+            display: inline;  
+            position: relative;  
+            text-decoration: none;  
+            top: 0px;  
+            left: 4px;  
+        }  
+        .tooltip:hover:after  
+        {  
+            background: #333;  
+            background: rgba(0,0,0,.8);  
+            border-radius: 5px;  
+            top: -5px;  
+            color: #fff;  
+            content: attr(alt);  
+            left: 160px;  
+            padding: 5px 15px;  
+            position: absolute;  
+            z-index: 98;  
+            width: 150px;  
+        }  
+        .tooltip:hover:before  
+        {  
+            border: solid;  
+            border-color: transparent black;  
+            border-width: 6px 6px 6px 0;  
+            bottom: 20px;  
+            content: "";  
+            left: 155px;  
+            position: absolute;  
+            z-index: 99;  
+            top: 3px;  
+        }  
+    </style> 
+
+ <style>
+
+.highcharts-drilldown-data-label text {
+  text-decoration: none !important;
+}
+
+.highcharts-xaxis-labels text {
+  text-decoration: none !important;
+}
+
+
+    </style>
+
+    <script>
+
+
+       
+
+function updateChart() {
+
+var comment = $("#comment").val();
+//alert (comment);
+if (comment == "") { comment="No Data";};
+
+
+ Highcharts.data({
+               csv: comment,
+               itemDelimiter: '\t',
+               parsed: function (columns) {
+                  var brands = {}, brandsData = [], versions = {}, drilldownSeries = [];
+                  
+                  // Parse percentage strings
+                  columns[1] = $.map(columns[1], function (value) {
+                     if (value.indexOf('%') === value.length - 1) {
+                        value = parseFloat(value);
+                     }
+                     return value;
+                  });
+                  $.each(columns[0], function (i, name) {
+                     var brand, version;
+
+                     if (i > -1) {
+                        // Remove special edition notes
+                        //name = name.split(' -')[0];
+
+                        // Split into brand and version
+                        //version = name.match(/([0-9]+[\.0-9x]*)/);
+			//alert(name);
+			version = name.split("*")[1];
+                        brand= name.split("*")[0];
+                 //       if (version) {
+                  //         version = version[0];
+                   //    }
+                  //      brand = name.replace(version, '');
+
+                        // Create the main data
+                        if (!brands[brand]) {
+                           brands[brand] = columns[1][i];
+                        } else {
+                           brands[brand] += columns[1][i];
+                        }
+
+                        // Create the version data
+                        if (version !== null) {
+                           if (!versions[brand]) {
+                              versions[brand] = [];
+                           }
+                           versions[brand].push([version, columns[1][i]]);
+                        }
+                     }
+                  });
+                  $.each(brands, function (name, y) {
+                     brandsData.push({
+                        name: name,
+                        y: y,
+                        drilldown: versions[name] ? name : null
+                     });
+                  });
+                  $.each(versions, function (key, value) {
+                     drilldownSeries.push({
+                        name: key,
+                        id: key,
+                        data: value
+
+
+
+        	,states: {
+            select: {
+                color: 'blue'
+            }
+        },
+        allowPointSelect: true
+
+
+                     });
+                  }); 
+                  
+//document.getElementById("demo").innerHTML = brands.Chrome;
+// Create the chart
+            $('#container').highcharts({
+                chart: {
+                    type: $("#chartType").val() ,
+
+		    events: {
+                        drilldown: function (e) { 
+                            document.getElementById("info").innerHTML =e.point.name;
+                        },
+			drillup: function (e) {
+                    	//   alert('drill Up' + this.options.series[0].data[0].name);
+                            document.getElementById("info").innerHTML ="main";
+                	}
+                    }	
+
+
+                },
+                title: {
+                    text: 'Open Work Orders'
+                },
+                subtitle: {
+                    text: 'Click the columns to view details.'
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Work Order Count'
+                    }
+                },
+		credits: {
+        		enabled: false
+    		},
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.0f}'
+                        },
+                        point: {
+                            events: {
+                                click: function () {
+                                    //document.getElementById("info").innerHTML = "point this.name = [" + this.name + "], this.category = [" + this.category + "]" + this.series.name;
+                                    document.getElementById("info").innerHTML =  this.series.name + "*" + this.name      
+                                }
+                            }
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> of total<br/>'
+                },
+
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: brandsData,
+
+
+		
+	
+                }],
+                drilldown: {
+		    series: drilldownSeries,
+		    	
+                    
+                 },
+
+            });
+        }
+    });
+
+
+};
+
+
+
+
+$(document).ready(function() {
+
+     updateChart();
+});
+
+    </script>
+
+</head>
+
+
+
+
+  <body style="background-color:#3e3e40;">
+        <div id="container"></div>
+        <div id="mychart"></div>
+       
+<div style="height:300px"></div> 
+<a href="#" alt="Chart data id='comment'" class="tooltip">  
+<textarea id="comment" name="dataForChart" rows="10" cols="50"></textarea></a>
+<a href="#" alt="chart type id='chartType'" class="tooltip">  
+                    <input id="chartType" type="text" value="column" /></a>  
+<h3 style="background-color:yellow;" id="info">Will display point click members here.</h3>
+<button onclick="updateChart()">Update Chart</button>      
+   </body>
+</html>
