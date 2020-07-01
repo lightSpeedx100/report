@@ -163,11 +163,13 @@ if (comment == "") { comment="No Data";};
 
 		    events: {
                         drilldown: function (e) { 
-                            document.getElementById("info").innerHTML =e.point.name;
+                           // document.getElementById("info").innerHTML =e.point.name;
+ 			     document.getElementById("info").value=e.point.name;	
                         },
 			drillup: function (e) {
                     	//   alert('drill Up' + this.options.series[0].data[0].name);
-                            document.getElementById("info").innerHTML ="main";
+                          //  document.getElementById("info").innerHTML ="main";
+                                document.getElementById("info").value="main";
                 	}
                     }	
 
@@ -261,8 +263,10 @@ $(document).ready(function() {
 <a href="#" alt="Chart data id='comment'" class="tooltip">  
 <textarea id="comment" name="dataForChart" rows="10" cols="50"></textarea></a>
 <a href="#" alt="chart type id='chartType'" class="tooltip">  
-                    <input id="chartType" type="text" value="column" /></a>  
-<h3 style="background-color:yellow;" id="info">Will display point click members here.</h3>
-<button onclick="updateChart()">Update Chart</button>      
+                    <input id="chartType" type="text" value="column" /></a>
+<a href="#" alt="information from click id='info'" class="tooltip">  
+                    <input id="info" type="text" value="" /></a>   
+<h3 style="background-color:yellow;" id="info2">Will display point click members here.</h3>
+<button id="updateChart"  onclick="updateChart()">Update Chart</button>      
    </body>
 </html>
