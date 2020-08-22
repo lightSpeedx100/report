@@ -48,29 +48,46 @@
 		padding: 2px;
 	}
 	</style>
-										<style>
-	#loader {
-		border: 12px solid #f3f3f3;
-		border-radius: 50%;
-		border-top: 12px solid #444444;
-		width: 70px;
-		height: 70px;
-		animation: spin 1s linear infinite;
-	}
 	
-	@keyframes spin {
-		100% {
-			transform: rotate(360deg);
-		}
-	}
+
+.header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+</style>
+
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}
+</script>
+									
 	
-	.center {
-		position: absolute;
-		top: 5%;
-		left: 50%;
-		margin: auto;
-	}
-	</style>
 										<script>
 	
 	$(document).ready(function() {
@@ -106,13 +123,13 @@ var date = new Date();
 									</head>
 									<body style="margin: 0 auto;">
 										
-										<div id="banner1">
+										<div class="header">
 											<h1 id="mytitle">P1P6 Loading Plan (ALL)</h1>
 											
 										</div>
                                                                                 <iframe src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdwwdVNyhi8XHKGCEypLXcLBLDsgb_A8-fmxp-VNdiPwR5Iiw/formResponse" frameborder="0" 
          style="overflow:hidden; 
-         display:block; position: absolute; height: 100%; width: 100%">
+         display:block; position: absolute; height: 70%; width: 100%">
 										
 									</body>
 								</html>
