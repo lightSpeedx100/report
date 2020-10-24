@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en" class="sr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" id="www-widgetapi-script" src="./Self Assessment_files/www-widgetapi.js.download" async=""></script><script src="./Self Assessment_files/iframe_api" id="YTAPI"></script>
+    
+    <title>Self Assessment</title>
+    <meta name="description" content=" - Collins Aerospace cares about the safety of you and your fellow workers. We are following the development of COVID-19 very closely.  In compliance with the Philippine DOLE requirement for self assessment and in the interest of ensuring a safe and healthy work environment, we ask that you accomplish this self-assessment daily and recommend that you take your temperature prior to coming to work and on arrival home.">
+    <meta name="author" content="formfacade.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://lh6.googleusercontent.com/-lRyrqMiOapc/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucn17Mxi5z-t_LcAH7veTCRRwEn6Xw/s96-c/photo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="./Self Assessment_files/plugins.css">
+    <link rel="stylesheet" href="./Self Assessment_files/style.css">
+    
+  <link href="./Self Assessment_files/material-icons.min.css" rel="stylesheet" media="screen">
+  <link href="./Self Assessment_files/socicon.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="./Self Assessment_files/style.min.css">
+  
+  <script src="./Self Assessment_files/ejs.js.download"></script>
+  <script src="./Self Assessment_files/firebase-app.js.download"></script>
+  <script src="./Self Assessment_files/firebase-database.js.download"></script>
+  <script src="./Self Assessment_files/firebase-auth.js.download"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCcbdBCI-Kgcz3tE1N4paeF9a-vdi3Uzz8",
+      authDomain: "formfacade.com",
+      databaseURL: "https://formfacade.firebaseio.com",
+      projectId: "formfacade",
+      storageBucket: "",
+      messagingSenderId: "743872305260",
+      appId: "1:743872305260:web:c5f7c23ccfa724447be049"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script>
+    FacadeSignin = {
+      params:{"action":"public","userId":"108077394370923741388","page":"all","publishId":"1FAIpQLSeespIuO4fZ14SBN423n3d49LW55GmUw1qtA3n4XKq8M7YE5A"},
+      query:{},
+      info:{"footer":"Self Assessment","language":"en","themePrimary":"#513f39","themeSecondary":"#513f39","themecolor":"colorful-5d33fb","title":"Self Assessment"},
+      user:{"displayName":"Jack Cruz","email":"jc7296511@gmail.com","formfacade":{"at":1598439994126},"installAt":1598077162588,"photoURL":"https://lh6.googleusercontent.com/-lRyrqMiOapc/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucn17Mxi5z-t_LcAH7veTCRRwEn6Xw/s96-c/photo.jpg","profile":{"at_hash":"aNcqZLUv1mFP9fCo8xsPFA","aud":"743872305260-20jsm39ds77n6lijo2o4cpq7jpnhmgoi.apps.googleusercontent.com","email":"jc7296511@gmail.com","email_verified":true,"exp":1598443593,"family_name":"Cruz","given_name":"Jack","iat":1598439993,"iss":"https://accounts.google.com","locale":"en-GB","name":"Jack Cruz","picture":"https://lh6.googleusercontent.com/-lRyrqMiOapc/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucn17Mxi5z-t_LcAH7veTCRRwEn6Xw/s96-c/photo.jpg","sub":"108077394370923741388"},"source":"formfacade","uid":"108077394370923741388","warn":{"type":"block"}},
+      init:function()
+      {
+        var curr = this;
+        firebase.auth().onAuthStateChanged(function(auth){
+          curr.loggedIn = auth?auth.providerData[0]:null;
+          if(curr.loggedIn && curr.loggedIn.uid==curr.params.userId)
+          {
+            console.log('Logged in as '+curr.loggedIn.uid);
+          }
+          else if(curr.params.action=='edit'||curr.params.action=='task')
+          {
+            if(curr.loggedIn && curr.loggedIn.uid!=curr.params.userId)
+            {
+              var eml = curr.user.addon?curr.user.addon.email:curr.user.email;
+              alert('Logged in as '+curr.loggedIn.email+' instead of '+eml);
+              firebase.auth().signOut().then(function(outrslt){ curr.init(); });
+            }
+            else
+            {
+              $('#LoginAlert').modal({});
+            }
+          }
+        });
+      },
+      signIn: function()
+      {
+        var curr = this;
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+          curr.init();
+        }).catch(function(err){
+          console.error('fail', err);
+          curr.init();
+        });
+      }
+    }
+    FacadeSignin.init();
+  </script>
+
+  </head><body style="height: 100%;"><div id="LoginAlert" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Restricted Access</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>You have to login to access this page.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="FacadeSignin.signIn()" data-dismiss="modal">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script async="" src="./Self Assessment_files/js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2J8RRM69MY');
+  </script>
+
+
+  <style>
+    .ff-form td{ font-size:smaller; }
+    #viewform select{ -webkit-appearance: menulist; appearance:menulist; }
+    .ff-form select{ -webkit-appearance: menulist; appearance:menulist; }
+
+    .ff-logo img{ display:inline; margin-right:5px; width:30px !important; height:auto !important; }
+    #ff-compose{ padding:20px; background-color:#fff; border-radius:.25rem; }
+    .ff-form .form-check-input{ margin-top:6px; }
+    .ff-form .form-check-label{ padding-left:5px; }
+    .ff-form .form-check-other{ padding-top:5px; }
+    .ff-form .form-check-other input[type=text]{ margin-left:5px; }
+    .ff-form .form-check-other input[type=radio]{ margin-top:15px; }
+    .ff-form .form-check-other input[type=checkbox]{ margin-top:15px; }
+    
+    .ff-edittheme{ display:none !important; }
+    .ff-editsection{ display:none !important; }
+    
+    
+      .background{ background-color:#f5f5f5; }
+      .font{ font-family:"Work Sans",Helvetica,Arial,sans-serif; }
+    
+    #EditModal select{ -webkit-appearance:menulist; appearance:menulist; }
+  </style>
+
+
+
+  <div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" style="z-index:9999;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+  
+  
+  <script>
+    shareFacade = {
+      params:{"action":"public","userId":"108077394370923741388","page":"all","publishId":"1FAIpQLSeespIuO4fZ14SBN423n3d49LW55GmUw1qtA3n4XKq8M7YE5A"},
+      query:{},
+      template: {"share":"\r\n<div class=\"modal-header\">\r\n  <h5 class=\"modal-title\">Share this form with others</h5>\r\n  <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n    <span aria-hidden=\"true\">&times;</span>\r\n  </button>\r\n</div>\r\n<div class=\"modal-body\">\r\n<form>\r\n    <div class=\"form-group\">\r\n      <input type=\"text\" class=\"form-control\" name=\"site\" \r\n      value=\""/>\r\n    </div>\r\n</form>\r\n</div>\r\n<div class=\"modal-footer\">\r\n  <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">\r\n    Done\r\n  </button>\r\n</div>\r\n"},
+      render: function()
+      {
+        var curr = this;
+        var userId = curr.params.userId;
+        var publishId = curr.params.publishId;
+        if(!userId || !publishId) return alert('No user or form found');
+        return jQuery.get('https://formfacade.com/shortid/'+userId+'/form/'+publishId).promise().then(function(jso){
+          curr.short = jso;
+          if(navigator.share && false) 
+          {
+            var navopts = {
+              title:'Self Assessment Form', 
+              url:'https://formfaca.de/sm/'+jso.shortId
+            };
+            return navigator.share(navopts);
+          }
+          else
+          {
+            var mhtml = ejs.render(curr.template.share, curr);
+            jQuery('#ShareModal .modal-content').html(mhtml);
+            jQuery('#ShareModal').modal({backdrop:'static', keyboard:false});
+          }
+        });
+      }
+  }
+  </script>
+  
+
+
+
+
+
+
+    <nav id="navbar-fixed-top" class="navbar navbar-dark navbar-expand-lg header-fullscreen navbar-transparent fixed-top sticky-active">
+        <div class="container">
+            <a class="navbar-brand" href="javascript:void(0)">
+              Self Assessment
+            </a>
+            
+            <div class="navbar-header">
+                
+            </div>
+            <div id="navbar-scroll" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-white-border btn-radius btn-xs d-lg-block d-none" href="javascript:void(0)" onclick="shareFacade.render()">Share</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <!--/.container -->
+    </nav>
+    <!--/.navbar-->
+    <!--Intro section-->
+    
+    <section id="home" class="hero dark fullscreen-hero parallax-me" data-parallax-bg-image="https://lh3.googleusercontent.com/OrJZczYyxfsIAHbn5TcsKskP3FIO5mSQLGmLBGlPhaw2o7-pW8rBHYg-bbHIcpE-YDhnPdVUHpgxhPxZUbIXInop4XJZXeNQJHt2pjGC3C8Ma0dw5SdS3zpV2YmI=w2238" style="position: relative; background: transparent; overflow: hidden; z-index: 0;"><div class="parallax-inner" style="position: absolute; background-image: url(&quot;https://lh3.googleusercontent.com/OrJZczYyxfsIAHbn5TcsKskP3FIO5mSQLGmLBGlPhaw2o7-pW8rBHYg-bbHIcpE-YDhnPdVUHpgxhPxZUbIXInop4XJZXeNQJHt2pjGC3C8Ma0dw5SdS3zpV2YmI=w2238&quot;); background-position: center center; background-repeat: no-repeat; background-size: cover; width: 1034.4px; height: 929.2px; transform: translate3d(0px, -155px, 0px); transition: transform 100ms ease 0s; z-index: -1;"></div>
+    
+        <div class="hero-overlay hero-gradient"></div>
+        <div class="mouse-down"><a class="anchor-scroll"><i class="icon ion-ios-arrow-down"></i></a>
+        </div>
+        <div class="hero-parallax">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-lg-9 mr-auto ml-auto">
+                                <h3 class="text-white display-4">
+                                  Self Assessment Form
+                                </h3>
+                                
+                                <div class="buttons scroll-to pt-4">
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--container-->
+                </div>
+                <!--hero content-->
+            </div>
+            <!--hero inner-->
+        </div>
+        <!--parallax hero-->
+    </section>
+
+    
+    <div class="container pt-4 pb-4" id="formsection">
+        
+        <div class="row">
+            <div class="col-xs-12 col-md-8 ml-auto mr-auto margin-b-30" id="ff-compose">
+
+
+
+
+<form id="Publish1FAIpQLSeespIuO4fZ14SBN423n3d49LW55GmUw1qtA3n4XKq8M7YE5A" class="ff-form" method="POST" action="https://docs.google.com/forms/u/1/d/e/1FAIpQLSeespIuO4fZ14SBN423n3d49LW55GmUw1qtA3n4XKq8M7YE5A/formResponse">
+<input type="hidden" name="id" value="1FAIpQLSeespIuO4fZ14SBN423n3d49LW55GmUw1qtA3n4XKq8M7YE5A">
+<input type="hidden" name="pageHistory" value="">
+
+<div class="ff-section" id="ff-sec-root" style="display:block;">
+  
+  <h3 class="h3 ff-title" id="ff-title-root">
+    
+    
+  </h3>
+  
+  <div class="ff-description">
+    <p>
+      Collins Aerospace cares about the safety of you and your fellow workers. We are following the development of COVID-19 very closely.  In compliance with the Philippine DOLE requirement for self assessment and in the interest of ensuring a safe and healthy work environment, we ask that you accomplish this self-assessment daily and recommend that you take your temperature prior to coming to work and on arrival home.
+      
+    </p>
+  </div>
+  
+<div class="ff-secfields">
+
+
+  <div class="form-group ff-item  ff-multiple_choice ff-nav-dyn" id="ff-id-981178156">
+    
+      <label for="Widget981178156">
+          Have you or a member of your household traveled internationally or on a cruise in the last 14 days? (Note: this does not include travel as part of the commute to/from work.)
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;981178156&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;981178156&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      
+      
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1857844432" id="1857844432.Yes" value="Yes" required="">
+              <label class="form-check-label" for="1857844432.Yes">
+                Yes
+              </label>
+            </div>
+          
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1857844432" id="1857844432.No" value="No" required="">
+              <label class="form-check-label" for="1857844432.No">
+                No
+              </label>
+            </div>
+          
+        
+      
+    
+    <div id="Error981178156" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item  ff-multiple_choice ff-nav-dyn" id="ff-id-771379238">
+    
+      <label for="Widget771379238">
+          In the last 14 days have you had close contact (&lt; 2 meters (6 feet) for 10 consecutive minutes or more) with a person who has been diagnosed with or suspected of having COVID-19 (by testing or by a health care provider)?
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;771379238&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;771379238&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      
+      
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1689617617" id="1689617617.Yes" value="Yes" required="">
+              <label class="form-check-label" for="1689617617.Yes">
+                Yes
+              </label>
+            </div>
+          
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1689617617" id="1689617617.No" value="No" required="">
+              <label class="form-check-label" for="1689617617.No">
+                No
+              </label>
+            </div>
+          
+        
+      
+    
+    <div id="Error771379238" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item  ff-multiple_choice ff-nav-dyn" id="ff-id-2029991282">
+    
+      <label for="Widget2029991282">
+          Do you have a fever greater than 37.5 C?
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;2029991282&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;2029991282&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      
+      
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.306685932" id="306685932.Yes" value="Yes" required="">
+              <label class="form-check-label" for="306685932.Yes">
+                Yes
+              </label>
+            </div>
+          
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.306685932" id="306685932.No" value="No" required="">
+              <label class="form-check-label" for="306685932.No">
+                No
+              </label>
+            </div>
+          
+        
+      
+    
+    <div id="Error2029991282" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item  ff-multiple_choice ff-nav-dyn" id="ff-id-1882093483">
+    
+      <label for="Widget1882093483">
+          Are you experiencing any of the following symptoms associated with COVID-19?  Fever, tiredness, chills, cough, shortness of breath, difficulty breathing, headache, muscle pain, nasal congestion, runny nose, sore throat, a new loss of taste or smell, or diarrhea.
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;1882093483&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;1882093483&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      
+      
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1955165256" id="1955165256.Yes" value="Yes" required="">
+              <label class="form-check-label" for="1955165256.Yes">
+                Yes
+              </label>
+            </div>
+          
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1955165256" id="1955165256.No" value="No" required="">
+              <label class="form-check-label" for="1955165256.No">
+                No
+              </label>
+            </div>
+          
+        
+      
+    
+    <div id="Error1882093483" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item  ff-multiple_choice ff-nav-dyn" id="ff-id-104265336">
+    
+      <label for="Widget104265336">
+          Have you tested positive for COVID-19, with or without symptoms, in the last 14 days?
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;104265336&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;104265336&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      
+      
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1420984357" id="1420984357.Yes" value="Yes" required="">
+              <label class="form-check-label" for="1420984357.Yes">
+                Yes
+              </label>
+            </div>
+          
+        
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="entry.1420984357" id="1420984357.No" value="No" required="">
+              <label class="form-check-label" for="1420984357.No">
+                No
+              </label>
+            </div>
+          
+        
+      
+    
+    <div id="Error104265336" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item  ff-text " id="ff-id-1155393958">
+    
+      <label for="Widget1155393958">
+          Name
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;1155393958&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;1155393958&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      <input type="text" class="form-control" id="Widget1155393958" name="entry.1956550014" value="" placeholder="" required="">
+    
+    <div id="Error1155393958" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item  ff-text " id="ff-id-193824116">
+    
+      <label for="Widget193824116">
+          ID No.
+          <span class="ff-required">*</span> 
+          <i class="ff-edit material-icons float-right" onclick="editFacade.showItem(&#39;193824116&#39;)">edit</i>
+          <i class="ff-editwidget material-icons" onclick="editFacade.showWidget(&#39;193824116&#39;)">settings</i>
+      </label>
+      
+      
+    
+    
+      <input type="text" class="form-control" id="Widget193824116" name="entry.541701519" value="" placeholder="" required="">
+    
+    <div id="Error193824116" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item ff-hide ff-date " id="ff-id-1614837522">
+    
+    
+      <input type="hidden" id="Widget1614837522" name="entry.582720699" value="2020-08-31">
+    
+<div class="form-group ff-item ff-hide ff-text " id="ff-id-205837553">
+    
+    
+      <input type="hidden" id="Widget205837553" name="entry.2051104402" value="Aug 31 2020 @ 7:07 PM">
+    
+    <div id="Error205837553" class="ff-widget-error"></div>
+  </div>
+
+    <div id="Error1614837522" class="ff-widget-error"></div>
+  </div>
+
+  <div class="form-group ff-item ff-hide ff-text " id="ff-id-205837553">
+    
+    
+      
+    
+    <div id="Error205837553" class="ff-widget-error"></div>
+  </div>
+
+</div>
+<div class="ff-button-bar">
+
+
+  
+    <button type="button" class="btn btn-primary ff-submit" id="ff-submit-root" onclick="formFacade.submit(this.form, &#39;root&#39;)">
+      <img src="./Self Assessment_files/send.svg" class="ff-submit-icon">
+      Submit
+    </button>
+  
+  
+
+
+
+
+  
+    
+  
+
+</div>
+</div>
+
+
+
+</form>
+
+</div>
+        </div>
+        
+        
+    </div>
+
+
+    
+    <footer class="footer">
+        <svg class="svg-footer z-index-0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 223" enable-background="new 0 0 1920 223" xml:space="preserve">
+            <polygon class="svg-white" opacity=".15" points="0,223 1920,223 1920,0 "></polygon>
+        </svg>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 margin-b-30">
+                    <span>
+                        Self Assessment
+                        
+                    </span>
+                </div>
+                <!--copyright col-->
+                <div class="col-md-7 text-right">
+                    <ul class="list-inline margin-b-30">
+                        <li class="list-inline-item"> 
+                            
+                                <a 
+                                </a>
+                            
+                        </li>
+                    </ul>
+                </div>
+                <!--footer nav col-->
+            </div>
+            <!--row-->
+        </div>
+        <!--container-->
+    </footer>
+    <!--footer end-->
+
+    <!--back to top-->
+    <a class="scrollToTop"><i class="icon ion-ios-arrow-up"></i></a>
+    <!--back to top end-->
+    <!--compile plugins-->
+    <script src="./Self Assessment_files/plugins.js.download"></script>
+    <script src="./Self Assessment_files/dosis.custom.js.download"></script>
+
+
+  
+
+  
+  <script async="" defer="" src="./Self Assessment_files/bootstrap.js.download"></script>
+  <script>
+    jQuery.ajax({
+      url:'/include/108077394370923741388/form/1FAIpQLSeespIuO4fZ14SBN423n3d49LW55GmUw1qtA3n4XKq8M7YE5A/bootstrap.js?div=ff-compose&onload=loadEditor',
+      dataType:'script', headers:{'flushcache':'yes'}, success:function(data){}
+    });
+  </script>
+  
+
+
+
+
+<div id="ff-style-header">
+
+<style>
+  .ff-copy{ padding-top:20px; }
+  .ff-form{ text-align:left; }
+  .ff-edit{ display:none; }
+  .ff-editwidget{ display:none; }
+  .ff-form .ff-title{ margin:0px; padding-top:0px; padding-bottom:8px; }
+  .ff-form .ff-description{ margin:0px; padding-top:0px; padding-bottom:18px; }
+  .ff-form .ff-description p{ margin:0px; padding:0px; line-height:22px; }
+  .ff-form .ff-widget-error{ display:none; margin:0px; padding:10px 0px 5px 0px; color:red; }
+  .ff-form .ff-widget-error b{ display:inline-block; background-color:red; color:#fff; border-radius:12px;
+    width:24px; height:24px; line-height:24px; text-align:center; margin-right:8px; }
+  .ff-form .ff-item{ margin:0px; padding-top:0px; padding-bottom:18px; }
+  .ff-form .ff-hide{ display:none; }
+  .ff-form .ff-item label{ margin:0px; padding-top:0px; padding-bottom:6px; line-height:22px; }
+  .ff-form .ff-item .ff-help{ display:block; margin:-6px 0px 0px 0px; padding-top:0px; padding-bottom:8px; line-height:18px; font-weight:400; }
+  .ff-form .ff-item .ff-help p{ margin:0px; }
+  .ff-form .ff-item .ff-image{ margin:0px; padding-top:0px; padding-bottom:12px; }
+  .ff-form .form-check-label{ display:inline; font-weight:400; }
+  .ff-form .ff-required{ color:red; }
+  .ff-form table{ width:100%; }
+  .ff-form table tr{ height:32px; }
+  .ff-form table tr td{ vertical-align:middle; text-align:center; padding: 6px 2px; }
+  .ff-form table tr .ff-grid-label{ text-align:left; }
+  .ff-form .form-check{ min-width:50px; }
+  .ff-form .ff-image{ display:block; max-width:100%; }
+  .ff-form .ff-video{ display:block; max-width:100%; }
+  .ff-form .ff-button-bar{ padding-top:10px; padding-bottom:10px; }
+  .ff-form [type='date']::-webkit-inner-spin-button { display: none; }
+  .ff-form [type='time']::-webkit-inner-spin-button { display: none; }
+  .ff-form .form-check-other input[type=text]{ display:inline-block; width:auto; }
+  .ff-alert{ padding:.75rem 1.25rem; margin-bottom:1rem; border:1px solid transparent;
+    border-radius: .25rem; color:#721c24; background-color:#f8d7da; border-color:#f5c6cb; }
+  .ff-partial{ display:flex; justify-content:space-between; max-width:800px; margin-left:auto; margin-right:auto; margin-bottom:8px; 
+    padding:.75rem 1.25rem; border:1px solid transparent; border-radius: .25rem; color:#004085; background-color:#cce5ff; border-color:#b8daff; }
+  .ff-partial a{ padding-left:12px; color:#004085; text-decoration:underline; font-weight:500; }
+  .ff-partial a:hover{ text-decoration:underline; font-weight:500; }
+  .ff-form .ff-button-bar{}
+  .ff-form button{ min-width:100px; min-height:50px; line-height:2; padding:10px 18px; cursor:pointer; }
+  .ff-form input::placeholder, .ff-form textarea::placeholder{ color:rgba(0,0,0,0.54); font-size:smaller; }
+  .ff-form .ff-check-table{ display:table; width:100%; }
+  .ff-form .ff-check-cell{ display:inline-block; margin-right:20px; margin-top:10px; margin-bottom:10px; }
+  .ff-form .ff-check-cell .ff-check-cell-image{ display:block; margin-bottom:10px; vertical-align:bottom; max-height:250px; cursor:pointer; }
+  .ff-form .ff-check-cell .form-check-input{ margin-left:0px; }
+  .ff-form .ff-check-cell .form-check-label{ margin-left:20px; }
+  .ff-form .ff-powered{ 
+    float:right; text-align:center; text-decoration:none;
+    padding-bottom:0px; padding-top:12px; margin-left:12px;
+  }
+  .ff-form .ff-powered:hover{ color:#001f3f !important; border-bottom:1px solid #001f3f !important; }
+  .ff-form .ff-warned{ 
+    float:right; text-align:center; text-decoration:none; border-radius:2px;
+    color:#000!important; background-color:#ffdddd!important; padding:10px; border:0px solid #001f3f !important; 
+  }
+  .ff-form .ff-warned b{ font-size:17px; }
+  .ff-form .ff-blocked{ 
+    float:right; text-align:center; text-decoration:none; border-radius:2px;
+    color:#fff!important; background-color:#f44336!important; padding:10px; border:0px solid #001f3f !important; 
+  }
+  .ff-form .ff-blocked b{ font-size:17px; }
+  .ff-form .ff-submit-icon{ display:inline; margin-top:-4px; margin-right:2px; width:24px; height:auto; vertical-align:middle; }
+  #ff-success{ padding-top:40px; padding-bottom:40px; text-align:center; font-size:24px; font-weight:500; }
+  .ff-summary, .ff-form .ff-summary{ width:auto; }
+  .ff-summary tr td:nth-child(1), .ff-form .ff-summary tr td:nth-child(1) { font-weight:550; }
+  .ff-summary tr td, .ff-form .ff-summary tr td{ vertical-align:top; text-align:left; }
+
+  
+    .ff-form .ff-next, .ff-form .ff-submit{ background-color:#5d33fb; color:#fff; }
+    .ff-form .ff-next:hover, .ff-form .ff-submit:hover {
+      background-color:#5d33fb; filter:brightness(95%); color:#fff; 
+      box-shadow: 0px 0px 20px rgb(93, 51, 251, 0.4);
+    }
+  
+  
+    
+     
+    
+  
+  
+</style>
+  
+  
+  <style>
+    .ff-form{ 
+      background:#e3e3e3; border-radius:8px; 
+      margin:0; padding:0; border:0;
+      font:inherit; vertical-align:baseline;
+      line-height:1.4; letter-spacing:.2px; 
+      color:#202124; font-size:15px;
+      margin-left:auto; margin-right:auto;
+    }
+    .ff-form .ff-title{ color:#202124; }
+    
+
+      .ff-form{ max-width:640px; padding:15px 30px; }
+
+      @media only screen and (max-width: 768px) {
+        .ff-form{ max-width:100%; padding:10px 20px; }
+      }
+    
+
+      .ff-form h3{ font-size:28px; }
+      .ff-form h4{ font-size:24px;}
+      .ff-form h3, .ff-form h4{ font-weight:500; letter-spacing:.6px; margin-top:4px; margin-bottom:4px; }
+      .ff-form .ff-item label{ font-size:17px; font-weight:500; line-height:22px; }
+      .ff-form .ff-item .text-muted{ color:#70757a; }
+      .ff-form .form-control{ display:block; padding:2px 6px 2px 6px; width:100%; height:36px; line-height:1.4; }
+      .ff-form .form-check-label { display:inline; padding-left:4px; }
+      .ff-form .ff-item textarea{ min-height:80px; }
+
+      .ff-form fieldset{
+        border: none;
+      }
+      .ff-form legend {
+        font-size: 1.4em;
+        margin-bottom: 10px;
+      }
+      .ff-form label {
+        display: block;
+        margin-bottom: 8px;
+      }
+      .ff-form input[type="text"],
+      .ff-form input[type="date"],
+      .ff-form input[type="datetime"],
+      .ff-form input[type="email"],
+      .ff-form input[type="number"],
+      .ff-form input[type="search"],
+      .ff-form input[type="time"],
+      .ff-form input[type="file"],
+      .ff-form input[type="url"],
+      .ff-form input[type="label"],
+      .ff-form textarea,
+      .ff-form select {
+        background: rgba(255,255,255,.1);
+        border: none;
+        border-radius: 4px;
+        font-size:17px;
+        margin: 0;
+        outline: 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box; 
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box; 
+        background-color: #c0c0c0;
+        color:#333;
+        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+        margin-bottom: 0px;
+      }
+      .ff-form input[type="text"]:focus,
+      .ff-form input[type="date"]:focus,
+      .ff-form input[type="datetime"]:focus,
+      .ff-form input[type="email"]:focus,
+      .ff-form input[type="number"]:focus,
+      .ff-form input[type="search"]:focus,
+      .ff-form input[type="time"]:focus,
+      .ff-form input[type="file"]:focus,
+      .ff-form input[type="url"]:focus,
+      .ff-form textarea:focus,
+      .ff-form select:focus{
+        background: #c0c0c0;
+        filter: brightness(95%);
+      }
+      .ff-form select{
+        -webkit-appearance: menulist-button;
+        height:35px;
+      }
+
+      .ff-form button{ 
+        border:0px; border-radius:4px;
+        font-size:15px; font-weight:500; letter-spacing:.6px; text-transform:uppercase;
+      }
+      .ff-form .ff-back{ background-color:#ccc; color:#333; }
+
+</style>
+
+
+
+
+
+
+
+
+</div></body></html>
