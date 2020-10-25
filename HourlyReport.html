@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>P1P6 Output</title>
 
-<style type="text/css">
+    <style type="text/css">
         .highcharts-figure,
         .highcharts-data-table table {
             min-width: 310px;
@@ -14,7 +14,9 @@
             margin: 1em auto;
         }
         
-        
+        #container {
+            height: 400px;
+        }
         
         .highcharts-data-table table {
             font-family: Verdana, sans-serif;
@@ -52,32 +54,34 @@
             background: #f1f7ff;
         }
     </style>
+</head>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
+<body>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
-    
-</head>
 
-<body>
-
-
-
-    
-        
+    <figure class="highcharts-figure">
         <div id="container"></div>
         <p class="highcharts-description">
             
         </p>
-   
-   
+    </figure>
+
     <script type="text/javascript">
         // Create the chart
-        
+        Highcharts.setOptions({
+            chart: {
+                style: {
+                    fontFamily: 'serif'
+                }
+            }
+        });
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
@@ -86,7 +90,7 @@
                 text: 'P1P6 OUTPUT SUMMARY'
             },
             subtitle: {
-                text: 'As of 14-Apr-20 04:22:34 PM'
+                text: 'As of 26-Oct-20 07:53:45 AM'
             },
             accessibility: {
                 announceNewData: {
@@ -105,9 +109,6 @@
             legend: {
                 enabled: true
             },
-	    credits: {
-        	enabled: false
-    	    },	
             plotOptions: {
                 series: {
                     borderWidth: 0,
@@ -117,60 +118,33 @@
                 }
             },
 
-            series: [{name:'13-Apr',data:[
-{name: 'P1',y: 2.38,drilldown: 'P1_13-Apr'},
-{name: 'P2',y: 3.88,drilldown: 'P2_13-Apr'},
-{name: 'P3P4',y: 2.91,drilldown: 'P3P4_13-Apr'},
-{name: 'P5',y: 1.31,drilldown: 'P5_13-Apr'},
-{name: 'P6',y: 3,drilldown: 'P6_13-Apr'},
+            series: [{name:'25-Oct',data:[
+{name: 'P1',y: 0.38,drilldown: 'P1_25-Oct'},
+{name: 'P2',y: 3.29,drilldown: 'P2_25-Oct'},
+{name: 'P3P4',y: 2.03,drilldown: 'P3P4_25-Oct'},
+{name: 'P5',y: 0.07,drilldown: 'P5_25-Oct'},
+{name: 'P6',y: 3,drilldown: 'P6_25-Oct'},
 ]},
-{name:'14-Apr',data:[
-{name: 'P1',y: 1.1,drilldown: 'P1_14-Apr'},
-{name: 'P2',y: 1.24,drilldown: 'P2_14-Apr'},
-{name: 'P3P4',y: 3.72,drilldown: 'P3P4_14-Apr'},
-{name: 'P5',y: 1.85,drilldown: 'P5_14-Apr'},
-{name: 'P6',y: 3,drilldown: 'P6_14-Apr'},
+{name:'26-Oct',data:[
+{name: 'P1',y: 1.99,drilldown: 'P1_26-Oct'},
+{name: 'P2',y: 0.18,drilldown: 'P2_26-Oct'},
+{name: 'P3P4',y: 2.78,drilldown: 'P3P4_26-Oct'},
+{name: 'P5',y: 0,drilldown: 'P5_26-Oct'},
+{name: 'P6',y: 3,drilldown: 'P6_26-Oct'},
 ]},
 ],
             drilldown: {
                 allowPointDrilldown: false,
-                series: [{id: 'P1_13-Apr',name: 'P1 13-Apr',
+                series: [{id: 'P1_25-Oct',name: 'P1 25-Oct',
  data: [
 ['7:00 AM',0],
 ['8:00 AM',0],
-['9:00 AM',0.43],
-['10:00 AM',0.43],
+['9:00 AM',0.19],
+['10:00 AM',0.19],
 ['11:00 AM',0],
 ['12:00 PM',0],
-['1:00 PM',0.23],
-['2:00 PM',0.36],
-['3:00 PM',0.35],
-['4:00 PM',0.58],
-['5:00 PM',0],
-['6:00 PM',0],
-['7:00 PM',0],
-['8:00 PM',0],
-['9:00 PM',0],
-['10:00 PM',0],
-['11:00 PM',0],
-['12:00 AM',0],
-['1:00 AM',0],
-['2:00 AM',0],
-['3:00 AM',0],
-['4:00 AM',0],
-['5:00 AM',0],
-['6:00 AM',0],
-]},
-{id: 'P2_13-Apr',name: 'P2 13-Apr',
- data: [
-['7:00 AM',0],
-['8:00 AM',0.11],
-['9:00 AM',0.44],
-['10:00 AM',0],
-['11:00 AM',1.12],
-['12:00 PM',0.3],
-['1:00 PM',1.73],
-['2:00 PM',0.18],
+['1:00 PM',0],
+['2:00 PM',0],
 ['3:00 PM',0],
 ['4:00 PM',0],
 ['5:00 PM',0],
@@ -188,18 +162,18 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P3P4_13-Apr',name: 'P3P4 13-Apr',
+{id: 'P2_25-Oct',name: 'P2 25-Oct',
  data: [
-['7:00 AM',0.1],
-['8:00 AM',0.21],
-['9:00 AM',0.2],
-['10:00 AM',0.13],
-['11:00 AM',0.22],
-['12:00 PM',0.36],
-['1:00 PM',0.1],
-['2:00 PM',0.23],
-['3:00 PM',1.24],
-['4:00 PM',0.12],
+['7:00 AM',0],
+['8:00 AM',0],
+['9:00 AM',0.44],
+['10:00 AM',0],
+['11:00 AM',1.12],
+['12:00 PM',0.13],
+['1:00 PM',1.6],
+['2:00 PM',0],
+['3:00 PM',0],
+['4:00 PM',0],
 ['5:00 PM',0],
 ['6:00 PM',0],
 ['7:00 PM',0],
@@ -215,19 +189,19 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P5_13-Apr',name: 'P5 13-Apr',
+{id: 'P3P4_25-Oct',name: 'P3P4 25-Oct',
  data: [
-['7:00 AM',0],
-['8:00 AM',0.13],
-['9:00 AM',0.26],
-['10:00 AM',0.07],
-['11:00 AM',0],
-['12:00 PM',0.26],
-['1:00 PM',0.26],
-['2:00 PM',0.13],
-['3:00 PM',0],
-['4:00 PM',0.07],
-['5:00 PM',0.13],
+['7:00 AM',0.1],
+['8:00 AM',0.1],
+['9:00 AM',0.2],
+['10:00 AM',0.13],
+['11:00 AM',0.04],
+['12:00 PM',0.3],
+['1:00 PM',0.04],
+['2:00 PM',0],
+['3:00 PM',1.12],
+['4:00 PM',0],
+['5:00 PM',0],
 ['6:00 PM',0],
 ['7:00 PM',0],
 ['8:00 PM',0],
@@ -242,7 +216,34 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P6_13-Apr',name: 'P6 13-Apr',
+{id: 'P5_25-Oct',name: 'P5 25-Oct',
+ data: [
+['7:00 AM',0],
+['8:00 AM',0],
+['9:00 AM',0],
+['10:00 AM',0],
+['11:00 AM',0],
+['12:00 PM',0.07],
+['1:00 PM',0],
+['2:00 PM',0],
+['3:00 PM',0],
+['4:00 PM',0],
+['5:00 PM',0],
+['6:00 PM',0],
+['7:00 PM',0],
+['8:00 PM',0],
+['9:00 PM',0],
+['10:00 PM',0],
+['11:00 PM',0],
+['12:00 AM',0],
+['1:00 AM',0],
+['2:00 AM',0],
+['3:00 AM',0],
+['4:00 AM',0],
+['5:00 AM',0],
+['6:00 AM',0],
+]},
+{id: 'P6_25-Oct',name: 'P6 25-Oct',
  data: [
 ['7:00 AM',0],
 ['8:00 AM',0],
@@ -269,7 +270,7 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P1_14-Apr',name: 'P1 14-Apr',
+{id: 'P1_26-Oct',name: 'P1 26-Oct',
  data: [
 ['7:00 AM',0],
 ['8:00 AM',0],
@@ -277,10 +278,10 @@
 ['10:00 AM',0.05],
 ['11:00 AM',0],
 ['12:00 PM',0],
-['1:00 PM',0.2],
-['2:00 PM',0.4],
-['3:00 PM',0.2],
-['4:00 PM',0.2],
+['1:00 PM',0.44],
+['2:00 PM',0.38],
+['3:00 PM',0.44],
+['4:00 PM',0.63],
 ['5:00 PM',0],
 ['6:00 PM',0],
 ['7:00 PM',0],
@@ -296,18 +297,18 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P2_14-Apr',name: 'P2 14-Apr',
+{id: 'P2_26-Oct',name: 'P2 26-Oct',
  data: [
 ['7:00 AM',0],
 ['8:00 AM',0],
 ['9:00 AM',0],
 ['10:00 AM',0],
-['11:00 AM',0.18],
-['12:00 PM',0.18],
-['1:00 PM',0.18],
-['2:00 PM',0.34],
-['3:00 PM',0.18],
-['4:00 PM',0.18],
+['11:00 AM',0],
+['12:00 PM',0],
+['1:00 PM',0],
+['2:00 PM',0.18],
+['3:00 PM',0],
+['4:00 PM',0],
 ['5:00 PM',0],
 ['6:00 PM',0],
 ['7:00 PM',0],
@@ -323,45 +324,18 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P3P4_14-Apr',name: 'P3P4 14-Apr',
- data: [
-['7:00 AM',0.06],
-['8:00 AM',0.23],
-['9:00 AM',0.15],
-['10:00 AM',0.17],
-['11:00 AM',0.05],
-['12:00 PM',1.24],
-['1:00 PM',0.24],
-['2:00 PM',0.72],
-['3:00 PM',0.31],
-['4:00 PM',0.55],
-['5:00 PM',0],
-['6:00 PM',0],
-['7:00 PM',0],
-['8:00 PM',0],
-['9:00 PM',0],
-['10:00 PM',0],
-['11:00 PM',0],
-['12:00 AM',0],
-['1:00 AM',0],
-['2:00 AM',0],
-['3:00 AM',0],
-['4:00 AM',0],
-['5:00 AM',0],
-['6:00 AM',0],
-]},
-{id: 'P5_14-Apr',name: 'P5 14-Apr',
+{id: 'P3P4_26-Oct',name: 'P3P4 26-Oct',
  data: [
 ['7:00 AM',0],
-['8:00 AM',0.07],
-['9:00 AM',0.33],
-['10:00 AM',0.46],
-['11:00 AM',0.26],
-['12:00 PM',0.07],
-['1:00 PM',0.2],
-['2:00 PM',0.13],
-['3:00 PM',0.13],
-['4:00 PM',0.2],
+['8:00 AM',0],
+['9:00 AM',0.06],
+['10:00 AM',0.05],
+['11:00 AM',0.05],
+['12:00 PM',1.12],
+['1:00 PM',0.13],
+['2:00 PM',0.72],
+['3:00 PM',0.21],
+['4:00 PM',0.44],
 ['5:00 PM',0],
 ['6:00 PM',0],
 ['7:00 PM',0],
@@ -377,7 +351,34 @@
 ['5:00 AM',0],
 ['6:00 AM',0],
 ]},
-{id: 'P6_14-Apr',name: 'P6 14-Apr',
+{id: 'P5_26-Oct',name: 'P5 26-Oct',
+ data: [
+['7:00 AM',0],
+['8:00 AM',0],
+['9:00 AM',0],
+['10:00 AM',0],
+['11:00 AM',0],
+['12:00 PM',0],
+['1:00 PM',0],
+['2:00 PM',0],
+['3:00 PM',0],
+['4:00 PM',0],
+['5:00 PM',0],
+['6:00 PM',0],
+['7:00 PM',0],
+['8:00 PM',0],
+['9:00 PM',0],
+['10:00 PM',0],
+['11:00 PM',0],
+['12:00 AM',0],
+['1:00 AM',0],
+['2:00 AM',0],
+['3:00 AM',0],
+['4:00 AM',0],
+['5:00 AM',0],
+['6:00 AM',0],
+]},
+{id: 'P6_26-Oct',name: 'P6 26-Oct',
  data: [
 ['7:00 AM',0],
 ['8:00 AM',0],
